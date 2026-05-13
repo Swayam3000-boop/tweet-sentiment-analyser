@@ -46,7 +46,7 @@ def predict():
         elif any(word in text.split() for word in positive_words):
             sentiment = "Positive"
         elif any(word in text.split() for word in negative_words):
-            sentiment = "Negative"
+            sentiment = "NEGATIVE"
 
         elif pos_prob > neg_prob:
             sentiment = "Positive"
