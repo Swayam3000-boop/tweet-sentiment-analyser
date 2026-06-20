@@ -17,6 +17,8 @@
     <form action="/predict" method="POST" class="space-y-4">
       <textarea name="tweet" placeholder="Write a tweet here..." rows="3"
         class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+      <input name="xquik_query" placeholder="Or search X posts with Xquik"
+        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
       
       <button type="submit"
         class="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition">
@@ -24,6 +26,11 @@
       </button>
     </form>
 
+    {% if error_text %}
+      <div class="mt-4 bg-red-50 border border-red-200 text-red-700 rounded-xl p-4">
+        {{ error_text }}
+      </div>
+    {% endif %}
 
     {% if prediction_text %}
       <div class="mt-8">
@@ -38,7 +45,7 @@
             </div>
           </div>
           <p class="text-gray-700 text-lg leading-relaxed">
-            {{ request.form['tweet'] }}
+            {{ tweet }}
           </p>
         </div>
 

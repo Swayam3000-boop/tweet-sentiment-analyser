@@ -2,11 +2,6 @@ import re
 from nltk.corpus import stopwords
 import pandas as pd
 
-df=pd.read_csv("data/tweets.csv",encoding='latin-1', header = None)
-df.columns = ['sentiment', 'tweet_id', 'date', 'query', 'user', 'text']
-df = df[['text', 'sentiment']]
-df['sentiment'] = df['sentiment'].replace(4,1)
-
 stop_words = set([
     'i','me','my','myself','we','our','ours','ourselves','you','your','yours',
     'yourself','yourselves','he','him','his','himself','she','her','hers',
@@ -89,6 +84,5 @@ def clean_tweet(text):
 def process_dataframe(df):
     df['cleaned_text'] = df['text'].apply(clean_tweet)
     return df
-
 
 

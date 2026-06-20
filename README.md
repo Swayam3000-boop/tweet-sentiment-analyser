@@ -56,6 +56,9 @@ Install dependencies
 
 pip install flask scikit-learn pandas numpy nltk joblib
 
+# or install from the checked-in dependency list
+pip install -r requirements.txt
+
 
 Prepare the dataset
 
@@ -72,6 +75,12 @@ python scripts/model.py
 Run Flask App
 
 python app/app.py
+
+Optional Xquik source
+
+Set `X_TWITTER_SCRAPER_API_KEY` to analyze a live X post from a search query.
+The app uses `x_twitter_scraper==0.4.1` and sends the selected post text through
+the same local sentiment model.
 
 
 Open in Browser
