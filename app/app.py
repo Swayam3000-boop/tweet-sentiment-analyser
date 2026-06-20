@@ -4,6 +4,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from scripts import process
+from xquik_source import search_xquik_posts
 
 
 app = Flask(__name__)
@@ -23,7 +24,21 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
-        raw_text = request.form["tweet"]
+        raw_text = request.form["tweet"].strip()
+        query = request.form.get("xquik_query", "").strip()
+
+        if not raw_text and query:
+            try:
+                posts = search_xquik_posts(query, limit=1)
+                raw_text = posts[0] if posts else ""
+            except RuntimeError as exc:
+                return render_template("home.html", error_text=str(exc), tweet=raw_text)
+            except Exception:
+                return render_template("home.html", error_text="Unable to load X posts.", tweet=raw_text)
+
+        if not raw_text:
+            return render_template("home.html", error_text="Enter a tweet or Xquik search query first.", tweet=raw_text)
+
         text = process.clean_tweet(raw_text)
 
 

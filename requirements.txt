@@ -1,0 +1,7 @@
+flask
+joblib
+nltk
+numpy
+pandas
+scikit-learn
+x_twitter_scraper==0.4.1
